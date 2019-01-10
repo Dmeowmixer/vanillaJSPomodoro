@@ -1,8 +1,16 @@
 'use strict';
-document.getElementById('startButton').addEventListener("click", appendText)
+document.getElementById('startButton').addEventListener("click", appendText);
+document.getElementById('stopButton').addEventListener("click", removeText);
+
 
 function appendText(){
-  let timerText = document.createTextNode(new Date());
-  let divTarget = document.getElementById('testDiv');
-  divTarget.appendChild(timerText);
+  let targetElement = document.getElementsByTagName('div')[0];
+  targetElement.setAttribute('id', 'theFirstDiv');
+  let newElement = document.createElement('p');
+  targetElement.appendChild(newElement);
+  document.getElementsByTagName('div')[0].innerHTML = 'Hello World ' + new Date();
+}
+
+function removeText(){
+  document.getElementById('theFirstDiv').remove();
 }
