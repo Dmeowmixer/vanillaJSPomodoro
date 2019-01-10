@@ -3,7 +3,10 @@ window.onload = function(){
   beginTimer();
 }
 var timerDiv = document.getElementById('timer');
-var dateText = document.  createElement('p');
+var dateText = document.createElement('p');
+var workTime = 5;
+var shortBreakTime = 5;
+var longBreakTime = 30;
 
 const buttonElements = document.querySelectorAll('#workTimer, #shortBreakTimer, #longBreakTimer');
 const elementsArray = [...buttonElements];
@@ -11,7 +14,12 @@ const elementsArray = [...buttonElements];
 elementsArray.forEach(x => {
   x.addEventListener('click', function(ele){
     if(ele.target.getAttribute('ID') == 'workTimer'){
-      console.log('selected workTimer');
+      //create a new child element within timerDiv
+      //push new child element after dateText into timerDiv
+      let workElement = document.createElement('p');
+      workElement.innerHTML = workTime;
+      timerDiv.appendChild(workElement);
+      beginCountdown(workElement);
     }else if(ele.target.getAttribute('ID') == 'shortBreakTimer'){
       console.log('selected shortBreakTimer');
     }else if(ele.target.getAttribute('ID') == 'longBreakTimer'){
@@ -24,8 +32,17 @@ elementsArray.forEach(x => {
 // document.getElementById('shortBreakTimer').addEventListener('click', startTimer);
 // document.getElementById('longBreakTimer').addEventListener('click', startTimer);
 
-function startTimer(length){
-  
+function beginCountdown(element){
+  let ele = element.innerHTML;
+  if(ele > 0){
+    var x = setInterval(function(){
+      if(ele == 0){
+        clearInterval(x);
+      }else{
+        element.innerHTML--
+      }
+    },1000);
+  }
 }
 
 
