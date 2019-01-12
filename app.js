@@ -7,18 +7,21 @@ window.onload = function(){
 var timerDiv = document.getElementById('timer');
 var dateText = document.createElement('p');
 var timerText = document.getElementById('timerText');
-var interval;
-var workTime = 5;
+var interval, timeRemaining;
+var workTime = 30;
 var shortBreakTime = 5;
 var longBreakTime = 30;
 
 let workElement = document.createElement('p');
 
 const buttonElements = document.querySelectorAll('#workTimer, #shortBreakTimer, #longBreakTimer');
+const timeButtonElements = document.querySelectorAll('#startTimerButton, #stopTimerButton');
 const elementsArray = [...buttonElements];
+const timeButtonsArray = [...timeButtonElements];
+
 
 function beginCountdown(element){
-  if(element.innerHTML > 0){  
+  if(element.innerHTML > 0){
     interval = setInterval(function() {
       if(element.innerHTML == 0){
         clearInterval(interval);
@@ -26,7 +29,7 @@ function beginCountdown(element){
       }else{
         element.innerHTML--;
       }
-    },1000);
+    },10000);
   }
 }
 
@@ -53,3 +56,13 @@ elementsArray.forEach(x => {
     }
   })
 });
+
+timeButtonsArray.forEach(x=> {
+  x.addEventListener('click', function(ele){
+    if(ele.target.getAttribute('ID') == 'startTimerButton'){
+      console.log('startedTimer');
+    } else if (ele.target.getAttribute('ID') == 'stopTimerButton') {
+      console.log('stoppedTimer');
+    }
+  })
+})
